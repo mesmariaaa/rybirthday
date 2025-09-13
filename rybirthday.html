@@ -1,0 +1,63 @@
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<title>butt</title>
+ <link rel="icon" type="image/png" href="favicon.png">
+<style>
+body {font-family: "Lucida Handwriting";line-height: 1.6;background-color:#66B2B2;margin: 0;padding: 0;}
+header{background-image:url("headerryan.jpg");color:#ffffff;padding: 20px;text-align:center;}
+header h1 {margin: 0;font-size: 48px;letter-spacing: 2px;}
+nav{background-color:#7ACCC8;text-align: center;padding: 10px 0;}
+nav a {font-family: "Lucida Console";color: white;padding:7px 25px;font-size: 17px;text-decoration:none;display:inline-block;margin:10px;}
+nav a:hover{background-color:#008080;color: #ffffff;}
+p{font-size: 16px;}
+table{font-size: 14px;}
+</style>
+</head>
+<body>
+<audio id="bgMusic">
+  <source src="personaSong.mp3" type="audio/mpeg">
+</audio>
+<button onclick="playMusic()">▶ Cue music ;)</button>
+<button onclick="document.getElementById('bgMusic').pause()">⏸ Pause</button> 
+<header>
+<h1>hey there gorjus...wink wink </h1>
+</header>
+<nav>
+<a href="ryryr.html">about</a>
+<a href="letter.html">letter ლ(╹◡╹ლ)</a>
+<a href="surprise.html">tiny surprises</a>
+<a href="review.html">uhm pls give review here</a>
+</nav>
+<br>
+<img src="ryanbg3.jpg" class="center-image" alt="what are you looking at" width="1600">
+<script>
+  function playMusic() {
+    const audio = document.getElementById('bgMusic');
+    audio.play();
+
+    const duration = 2 * 1000;
+    const end = Date.now() + duration;
+
+    (function frame() {
+      confetti({
+        particleCount: 5,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 }
+      });
+      confetti({
+        particleCount: 5,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 }
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>pet me butthair</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.5s ease;
+      background: #fff0f5;
+      overflow: hidden;
+    }
+
+    #emoji {
+      font-size: 100px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+
+    #caption {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #ff1493;
+    }
+
+    #reset {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 20px;
+      animation: float 1s ease-out forwards;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-60px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="emoji">🙄</div>
+  <div id="caption">Pet me you buttface</div>
+  <button id="reset">Reset Mood</button>
+
+  <script>
+    const emoji = document.getElementById('emoji');
+    const caption = document.getElementById('caption');
+    const resetBtn = document.getElementById('reset');
+    let petCount = 0;
+    let idleTimer;
+
+    function updateMood() {
+      if (petCount < 3) {
+        document.body.style.background = '#fff0f5';
+      } else if (petCount < 6) {
+        document.body.style.background = '#ffe4e1';
+      } else if (petCount < 10) {
+        document.body.style.background = '#ffcccb';
+      } else {
+        document.body.style.background = '#ff9999';
+      }
+    }
+
+    function sparkleEffect() {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.textContent = '✨';
+      sparkle.style.left = `${emoji.offsetLeft + 40}px`;
+      sparkle.style.top = `${emoji.offsetTop - 20}px`;
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    }
+
+    emoji.addEventListener('mouseover', () => {
+      emoji.textContent = '😝';
+      caption.textContent = 'sigh, better i guess';
+      clearTimeout(idleTimer);
+      sparkleEffect();
+    });
+
+    emoji.addEventListener('mouseout', () => {
+      idleTimer = setTimeout(() => {
+        emoji.textContent = '🤨';
+        caption.textContent = 'who said you could stop petting?';
+      }, 2000);
+    });
+
+    emoji.addEventListener('click', () => {
+      petCount++;
+      updateMood();
+
+      if (petCount < 5) {
+        emoji.textContent = '😄';
+        caption.textContent = `You’ve pet me ${petCount} times!`;
+        sparkleEffect();
+      } else if (petCount < 10) {
+        emoji.textContent = '😐';
+        caption.textContent = 'Okay thats enough';
+      } else {
+        emoji.textContent = '🤬';
+        caption.textContent = 'GET YOUR FILTHY HANDS OFF OF ME';
+        emoji.style.pointerEvents = 'none';
+      }
+    });
+
+    resetBtn.addEventListener('click', () => {
+      petCount = 0;
+      emoji.textContent = '😐';
+      caption.textContent = 'Pet me you buttface';
+      emoji.style.pointerEvents = 'auto';
+      document.body.style.background = '#fff0f5';
+    });
+  </script>
+</body>
+</html>

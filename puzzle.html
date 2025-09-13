@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jumping Button</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff0f5;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    #jump-btn {
+      position: absolute;
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    #message {
+      position: absolute;
+      top: 20px;
+      font-size: 24px;
+      color: #ff1493;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<a href="emojipet.html"> Click here to try something else! </a>
+  <button id="jump-btn">CATCH ME SUCKEERR 😝😝😝</button>
+  <div id="message">You Win!! But I'm turning you in for touching without consent</div>
+
+  <script>
+    const button = document.getElementById('jump-btn');
+    const message = document.getElementById('message');
+    let caught = false;
+
+    button.addEventListener('mouseover', () => {
+      if (caught) return;
+      const x = Math.random() * (window.innerWidth - button.offsetWidth);
+      const y = Math.random() * (window.innerHeight - button.offsetHeight);
+      button.style.left = `${x}px`;
+      button.style.top = `${y}px`;
+    });
+
+    button.addEventListener('click', () => {
+      caught = true;
+      button.style.display = 'none';
+      message.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
